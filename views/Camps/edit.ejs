@@ -1,0 +1,96 @@
+<% layout('layout/boilerplate') %>
+
+
+    <div class="row">
+        <h1 class="text-center">Edit camp site</h1>
+        <div class="col-6 offset-3 mt-3">
+            <form action="/camps/<%= camp._id%>?_method=PUT" method="POST" class="needs-validation" novalidate
+                enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label class="form-label" for="name">Enter the name of the camp</label>
+                    <input class="form-control" type="text" placeholder="Name" name="camp[name]" id="name"
+                        value="<%= camp.name %>" required>
+                    <div class="invalid-feedback">
+                        Please provide a valid Name!
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="location">Location</label>
+                    <input class="form-control" type="text" name="camp[location]"
+                        placeholder="Example: Kheerganga, Kullu" id="location" value="<%= camp.location %>" required>
+                    <div class="invalid-feedback">
+                        Please provide a Location!
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="image">Add Images</label>
+                    <input class="form-control" type="file" name="image" id="image" multiple>
+                    <div class="invalid-feedback">
+                        Please provide a valid URL!
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="description">Description</label>
+                    <textarea class="form-control" type="text" name="camp[description]" id="description" value=""
+                        required><%= camp.description %>
+                    </textarea>
+                    <div class="invalid-feedback">
+                        Please provide a valid Description!
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="sr-only" for="price">Price</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">$</div>
+                        </div>
+                        <input type="text" class="form-control" id="price" value="<%= camp.price %>" name="camp[price]"
+                            required>
+                        <div class="invalid-feedback">
+                            Please provide a valid Price!
+                        </div>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <% camp.image.forEach(function(img, i){ %>
+                        <img src="<%= img.thumbnail %>" alt="" class="img-thumbnail">
+                        <div class="form-check-inline">
+                            <input type="checkbox" id="image-<%= i %>" name="deleteImages[]"
+                                value="<%= img.filename %>">
+                        </div>
+                        <label for="image-<%= i %>">Delete</label>
+                        <% }) %>
+
+
+                </div>
+
+                <button class="btn btn-warning">Update the camp</button>&nbsp;<a class="btn btn-secondary"
+                    href="/camps">
+                    All
+                    camps</a>
+
+
+            </form>
+
+
+
+        </div>
+    </div>

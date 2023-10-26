@@ -1,0 +1,43 @@
+<% layout('layout/boilerplate') %>
+
+
+    <div class="container">
+        <div class="body d-md-flex align-items-center justify-content-between">
+            <div class="box-1 mt-md-0 mt-5">
+                <img src="https://source.unsplash.com/random/?mountains,camp,hiking" class="" alt="">
+            </div>
+            <div class=" box-2 d-flex flex-column h-100">
+                <div class="mt-5">
+                    <p class="mb-1 h-1 offset-3">Create Account.</p>
+                    <p class="text-muted mb-2 offset-2">Let's review or create your fav camps!</p>
+                    <div class="d-flex flex-column align-items-center">
+                        <!-- <p class="text-muted mb-2">Continue with...</p> -->
+                        <div class="d-flex align-items-center">
+                            <!-- <div class="row">
+                            <div class="col-6 offset-3"> -->
+                            <form action="/register" method="post" class="needs-validation" novalidate>
+                                <div class="mb-3">
+                                    <label for="username">Username</label>
+                                    <input type="username" class="form-control" id="username"
+                                        placeholder="Enter username" name="user[username]">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email">Email address</label>
+                                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                                        placeholder="Enter email" name="user[email]">
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with
+                                        anyone
+                                        else.</small>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1">Password</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword1"
+                                        placeholder="Password" name="user[password]">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                    <span class="fas fa-times"></span>
+                </div>
+            </div>
