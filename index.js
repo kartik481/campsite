@@ -150,10 +150,15 @@ app.use((req, res, next) => {
 
 })
 
+app.get('/', wrapAsync(async (req, res) => {
+    const camps = await campGround.find({})
+    res.render('home', { title:"Home" });
+}))
+
 // Routing to home page
 app.get('/home', wrapAsync(async (req, res) => {
     const camps = await campGround.find({})
-    res.render('home', { camps });
+    res.render('home');
 }))
 
 // basic routes
