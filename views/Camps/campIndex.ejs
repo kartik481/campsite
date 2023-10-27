@@ -1,11 +1,19 @@
 <% layout('layout/boilerplate') %>
-<div id="map" style="width: 100%; height: 430px;"></div>
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
+
+
+
+<div id="map" style="width: 100%; height: 430px;">
+</div>
+
+<div class="container mt-4">
     <% for(let camp of camps) {%>
         <div class="card mb-3">
             <div class="row">
                 <div class="col-md-4">
                     <% if(camp.image.length){ %>
-                    <img class="img-fluid img-thumbnail h-100 w-100" src="<%=camp.image[0].url %>" alt="">
+                    <img class="img-fluid img-thumbnail customImage" src="<%=camp.image[0].url %>" alt="">
                    <% }else{ %>
                     <img class="img-fluid img-thumbnail" src="https://images.unsplash.com/photo-1601618613229-ec7645fad6fa?auto=format&fit=crop&q=80&w=3174&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
 
@@ -32,6 +40,8 @@
 
 
         <% } %>
+
+    </div>
         <script>
             const maptoken = '<%- process.env.MAPBOX_TOKEN %>';
             const campMaps = {"features" :<%- JSON.stringify(camps) %>}

@@ -6,7 +6,7 @@ const geoCoder = mbxGeocoding({ accessToken: mapsToken })
 
 module.exports.index = async (req, res) => {
     const camps = await campGround.find({})
-    res.render('Camps/campIndex', { camps })
+    res.render('Camps/campIndex', { camps, title:"Camps" })
 }
 
 module.exports.makeCamp = async (req, res, next) => {
@@ -27,7 +27,7 @@ module.exports.makeCamp = async (req, res, next) => {
 }
 
 module.exports.viewMakeCamp = async (req, res) => {
-    res.render('Camps/newcamp');
+    res.render('Camps/newcamp',  {title:"New Campsite"});
 }
 
 module.exports.showCamp = async (req, res, next) => {
@@ -43,12 +43,19 @@ module.exports.showCamp = async (req, res, next) => {
         req.flash('error', "Camp site is not found");
         res.redirect('/camps')
     }
-    res.render('Camps/show', { camp });
+    res.render('Camps/show', { camp, title:`${camp.name}` });
 }
 
 module.exports.updateCamp = async (req, res) => {
+    const geoData = await geoCoder.forwardGeocode(
+        {
+            query: req.body.camp.location,
+            limit: 1
+        }
+    ).send()
     const { id } = req.params;
     const camp = await campGround.findByIdAndUpdate(id, { ...req.body.camp });
+    camp.geometry = geoData.body.features[0].geometry;
     if (req.files) {
         const img = req.files.map(f => ({ url: f.path, filename: f.filename }))
         camp.image.push(...img);
@@ -79,5 +86,18 @@ module.exports.destroyCamp = async (req, res) => {
 module.exports.editCamp = async (req, res) => {
     const { id } = req.params;
     const c = await campGround.findById(id);
-    res.render('Camps/edit', { camp: c });
+    res.render('Camps/edit', { camp: c, title:`Editing ${c.name}` });
+}
+
+module.exports.Search = async(req, res)=>{
+    const {name} = req.body;
+    const camp = await campGround.findOne({name});
+    if(camp){
+        req.flash('success', "Found a matching camp in database");
+        res.redirect(`/camps/${camp._id}`)
+    }
+    else{
+        req.flash('error', `Sorry cannot find ${name} in the database`);
+        res.redirect('/camps');
+     }
 }

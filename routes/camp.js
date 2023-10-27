@@ -19,5 +19,6 @@ router.route('/').get(wrapAsync(camps.index)).post(isLoggedIn, upload.array('ima
 router.get('/makecamp', isLoggedIn, wrapAsync(camps.viewMakeCamp));
 router.route('/:id').get(isLoggedIn, wrapAsync(camps.showCamp)).put(isLoggedIn, upload.array('image'), validateCamps, isOwner, wrapAsync(camps.updateCamp)).delete(isLoggedIn, isOwner, wrapAsync(camps.destroyCamp));
 router.get('/:id/edit', isLoggedIn, isOwner, wrapAsync(camps.editCamp));
+router.route('/search').post(isLoggedIn, wrapAsync(camps.Search))
 
 module.exports = router;

@@ -2,9 +2,10 @@ mapboxgl.accessToken = maptoken;;
 const map = new mapboxgl.Map({
 container: 'map',
 // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-style: 'mapbox://styles/mapbox/dark-v11',
-center: [-103.5917, 40.6699],
-zoom: 3
+style: 'mapbox://styles/mapbox/light-v11',
+
+center: [8.682127, 50.110924],
+zoom: 4
 });
  
 map.on('load', () => {
@@ -35,13 +36,11 @@ paint: {
 'circle-color': [
 'step',
 ['get', 'point_count'],
-'#D3D3D3',
+'#51bbd6',
+5,
+'#f1f075',
 10,
-'#FFD700',
-100,
-'#ADD8E6',
-250,
-'#ffcccb'
+'#f28cb1'
 ],
 'circle-radius': [
 'step',
@@ -74,7 +73,7 @@ source: 'campMap',
 filter: ['!', ['has', 'point_count']],
 paint: {
 'circle-color': '#11b4da',
-'circle-radius': 4,
+'circle-radius': 5,
 'circle-stroke-width': 1,
 'circle-stroke-color': '#fff'
 }
@@ -130,3 +129,4 @@ map.on('mouseleave', 'clusters', () => {
 map.getCanvas().style.cursor = '';
 });
 });
+map.addControl(new mapboxgl.NavigationControl());

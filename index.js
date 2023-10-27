@@ -76,9 +76,9 @@ const sessionConfig = {
     resave: false,
     saveUninitialized: true,
     cookie: {
-        name:'manchester',
+        name: process.env.SECRET,
         httpOnly: true,
-        // secure:true,
+        secure:true,
         expires: Date.now() + 24 * 60 * 60 * 1000,
         maxAge: 24 * 60 * 60 * 1000
     }
@@ -103,12 +103,12 @@ const styleSrcUrls = [
     "https://api.tiles.mapbox.com",
     "https://fonts.googleapis.com",
     "https://use.fontawesome.com",
-    "https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css",
+    "https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
 ];
 const connectSrcUrls = [
     "https://api.mapbox.com",
     "https://*.tiles.mapbox.com",
-    "https://events.mapbox.com",
+    "https://events.mapbox.com"
 ];
 const fontSrcUrls = [];
 app.use(
@@ -125,7 +125,8 @@ app.use(
                 "'self'",
                 "blob:",
                 "data:",
-                "https://res.cloudinary.com/dwpxum7yt/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT! 
+                "https://source.unsplash.com",
+                "https://res.cloudinary.com/dwpxum7yt/", 
                 "https://images.unsplash.com",
             ],
             fontSrc: ["'self'", ...fontSrcUrls],
