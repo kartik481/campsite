@@ -78,7 +78,7 @@ const sessionConfig = {
     cookie: {
         name: process.env.SECRET,
         httpOnly: true,
-        secure:true,
+        // secure:true,
         expires: Date.now() + 24 * 60 * 60 * 1000,
         maxAge: 24 * 60 * 60 * 1000
     }
