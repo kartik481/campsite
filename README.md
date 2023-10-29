@@ -47,7 +47,7 @@ If you need to update `npm`, you can make it using `npm`! Cool right? After runn
     $ cd campsite
 
 ## Adding the Data to the database
-Use can you files in the seeds folder to seed the database inoder to get full functionality. Just run the following command:
+Use the files in the seeds folder to seed the database inorder to get full functionality. Just run the following command:
 
     $ node seeds/index.js
 
